@@ -1,0 +1,22 @@
+#card-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.center {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+app-playing-card {
+    cursor: pointer;
+}
