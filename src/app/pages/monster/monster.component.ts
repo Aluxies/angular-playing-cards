@@ -6,10 +6,15 @@ import { MonsterType } from '../../utils/monsters.utils';
 import { PlayingCardComponent } from "../../components/playing-card/playing-card.component";
 import { Monster } from '../../models/monsters.model';
 import { MonsterService } from '../../services/monster/monster.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteMonsterConfirmationDialogComponent } from '../../components/delete-monster-confirmation-dialog/delete-monster-confirmation-dialog.component';
 
 @Component({
   selector: 'app-monster',
-  imports: [ReactiveFormsModule, PlayingCardComponent],
+  imports: [ReactiveFormsModule, PlayingCardComponent, MatButtonModule, MatInputModule, MatSelectModule],
   templateUrl: './monster.component.html',
   styleUrl: './monster.component.css'
 })
@@ -18,6 +23,7 @@ export class MonsterComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private formBuilder = inject(FormBuilder);
   private monsterService = inject(MonsterService);
+  private readonly dialog = inject(MatDialog);
 
   private routeSubscription: Subscription | null = null;
   private formValuesSubscription: Subscription | null = null;
@@ -105,6 +111,17 @@ export class MonsterComponent implements OnInit, OnDestroy {
   isFieldValid(name: string) {
     const formControl = this.formGroup.get(name);
     return formControl?.invalid && (formControl?.dirty || formControl?.touched);
+  }
+
+  deleteMonster() {
+    const dialogRef = this.dialog.open(DeleteMonsterConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(confirmation => {
+      if (confirmation) {
+        this.monsterService.delete(this.monsterId);
+        this.navigateBack();
+      }
+    })
   }
 
   onFileChange(event: any) {

@@ -1,9 +1,13 @@
-body, html {
+html {
     font-family: Roboto, sans-serif;
-    height: 100%;
     background: linear-gradient(
         180deg,
         rgb(185, 120, 247),
-        white
+        rgb(213, 188, 236)
     );
+    background-color: rgb(213, 188, 236);
+    background-repeat:no-repeat;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

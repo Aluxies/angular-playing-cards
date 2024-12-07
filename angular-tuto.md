@@ -28,6 +28,22 @@ ng g c components/[component_name] --skip-tests
 ng g s services/[service_name] --skip-tests
 ```
 
+### Create an interceptor without tests file
+
+#### An interceptor is a middleware in Express but only for outcoming requests
+
+```
+ng generate interceptor interceptors/auth-token --skip-tests
+```
+
+### Create a guard without tests file
+
+#### A guard is a middleware in Express but only for incoming requests
+
+```
+ng generate guard guards/is-logged-in --skip-tests
+```
+
 ### Project structure :
 
 /

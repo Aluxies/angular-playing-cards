@@ -4,85 +4,88 @@
 
 <div class="main">
     <form [formGroup]="formGroup" (submit)="submit($event)" action="">
-        <div class="form-field">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" formControlName="name"/>
+        <mat-form-field>
+            <mat-label for="name">Name</mat-label>
+            <input matInput type="text" name="name" id="name" formControlName="name"/>
             @if (isFieldValid('name')) {
-                <div class="error">This field is required</div>
+                <mat-error>This field is required</mat-error>
             }
-        </div>
+        </mat-form-field>
         <div class="form-field">
-            <label for="image">Image</label>
-            <input type="file" name="image" id="image" (change)="onFileChange($event)"/>
+            <button mat-raised-button type="button" (click)="imageInput.click()">Upload file: {{imageInput.files?.[0]?.name || "..."}}</button>
+            <input hidden #imageInput type="file" name="image" id="image" (change)="onFileChange($event)"/>
             @if (isFieldValid('image')) {
                 <div class="error">This field is required</div>
             }
         </div>
-        <div class="form-field">
-            <label for="type">Type</label>
-            <select name="type" id="type" formControlName="type">
+        <mat-form-field>
+            <mat-label for="type">Type</mat-label>
+            <mat-select name="type" id="type" formControlName="type">
                 @for (type of monsterTypes; track type) {
-                    <option [value]="type">{{type}}</option>
+                    <mat-option [value]="type">{{type}}</mat-option>
                 }
-            </select>
+            </mat-select>
             @if (isFieldValid('type')) {
-                <div class="error">This field is required</div>
+                <mat-error>This field is required</mat-error>
             }
-        </div>
-        <div class="form-field">
-            <label for="hp">HP</label>
-            <input type="number" name="hp" id="hp" formControlName="hp"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="hp">HP</mat-label>
+            <input matInput type="number" name="hp" id="hp" formControlName="hp"/>
             @if (isFieldValid('hp')) {
                 @if (formGroup.get('hp')?.hasError('required')) {
-                    <div class="error">This field is required</div>
+                    <mat-error>This field is required</mat-error>
                 }
                 @if (formGroup.get('hp')?.hasError('min')) {
-                    <div class="error">This field must be greater than 0</div>
+                    <mat-error>This field must be greater than 0</mat-error>
                 }
                 @if (formGroup.get('hp')?.hasError('max')) {
-                    <div class="error">This field must be smaller or equal to 200</div>
+                    <mat-error>This field must be smaller or equal to 200</mat-error>
                 }
             }
-        </div>
-        <div class="form-field">
-            <label for="figureCaption">Figure caption</label>
-            <input type="text" name="figureCaption" id="figureCaption" formControlName="figureCaption"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="figureCaption">Figure caption</mat-label>
+            <input matInput type="text" name="figureCaption" id="figureCaption" formControlName="figureCaption"/>
             @if (isFieldValid('figureCaption')) {
-                <div class="error">This field is required</div>
+                <mat-error>This field is required</mat-error>
             }
-        </div>
-        <div class="form-field">
-            <label for="attackName">Attack name</label>
-            <input type="text" name="attackName" id="attackName" formControlName="attackName"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="attackName">Attack name</mat-label>
+            <input matInput type="text" name="attackName" id="attackName" formControlName="attackName"/>
             @if (isFieldValid('attackName')) {
-                <div class="error">This field is required</div>
+                <mat-error>This field is required</mat-error>
             }
-        </div>
-        <div class="form-field">
-            <label for="attackStrength">Attack strength</label>
-            <input type="number" name="attackStrength" id="attackStrength" formControlName="attackStrength"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="attackStrength">Attack strength</mat-label>
+            <input matInput type="number" name="attackStrength" id="attackStrength" formControlName="attackStrength"/>
             @if (isFieldValid('attackStrength')) {
                 @if (formGroup.get('attackStrength')?.hasError('required')) {
-                    <div class="error">This field is required</div>
+                    <mat-error>This field is required</mat-error>
                 }
                 @if (formGroup.get('attackStrength')?.hasError('min')) {
-                    <div class="error">This field must be greater than 0</div>
+                    <mat-error>This field must be greater than 0</mat-error>
                 }
                 @if (formGroup.get('attackStrength')?.hasError('max')) {
-                    <div class="error">This field must be smaller or equal to 200</div>
+                    <mat-error>This field must be smaller or equal to 200</mat-error>
                 }
             }
-        </div>
-        <div class="form-field">
-            <label for="attackDescription">Attack description</label>
-            <input type="text" name="attackDescription" id="attackDescription" formControlName="attackDescription"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="attackDescription">Attack description</mat-label>
+            <input matInput type="text" name="attackDescription" id="attackDescription" formControlName="attackDescription"/>
             @if (isFieldValid('attackDescription')) {
-                <div class="error">This field is required</div>
+                <mat-error>This field is required</mat-error>
             }
+        </mat-form-field>
+        <div class="button-container left">
+            <button mat-flat-button style="background-color: rgb(228, 25, 25);" type="button" (click)="deleteMonster()">Delete</button>
         </div>
-        <div class="button-container">
-            <button (click)="navigateBack()">Back</button>
-            <button type="submit" [disabled]="formGroup.invalid">Save</button>
+        <div class="button-container right">
+            <button mat-button (click)="navigateBack()">Back</button>
+            <button mat-flat-button type="submit" [disabled]="formGroup.invalid">Save</button>
         </div>
     </form>
 </div>
