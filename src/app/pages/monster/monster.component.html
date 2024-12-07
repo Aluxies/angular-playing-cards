@@ -1,91 +1,136 @@
 <div class="preview">
-    <app-playing-card [monster]="monster"></app-playing-card>
+  <app-playing-card [monster]="monster"></app-playing-card>
 </div>
 
 <div class="main">
-    <form [formGroup]="formGroup" (submit)="submit($event)" action="">
-        <mat-form-field>
-            <mat-label for="name">Name</mat-label>
-            <input matInput type="text" name="name" id="name" formControlName="name"/>
-            @if (isFieldValid('name')) {
-                <mat-error>This field is required</mat-error>
-            }
-        </mat-form-field>
-        <div class="form-field">
-            <button mat-raised-button type="button" (click)="imageInput.click()">Upload file: {{imageInput.files?.[0]?.name || "..."}}</button>
-            <input hidden #imageInput type="file" name="image" id="image" (change)="onFileChange($event)"/>
-            @if (isFieldValid('image')) {
-                <div class="error">This field is required</div>
-            }
-        </div>
-        <mat-form-field>
-            <mat-label for="type">Type</mat-label>
-            <mat-select name="type" id="type" formControlName="type">
-                @for (type of monsterTypes; track type) {
-                    <mat-option [value]="type">{{type}}</mat-option>
-                }
-            </mat-select>
-            @if (isFieldValid('type')) {
-                <mat-error>This field is required</mat-error>
-            }
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="hp">HP</mat-label>
-            <input matInput type="number" name="hp" id="hp" formControlName="hp"/>
-            @if (isFieldValid('hp')) {
-                @if (formGroup.get('hp')?.hasError('required')) {
-                    <mat-error>This field is required</mat-error>
-                }
-                @if (formGroup.get('hp')?.hasError('min')) {
-                    <mat-error>This field must be greater than 0</mat-error>
-                }
-                @if (formGroup.get('hp')?.hasError('max')) {
-                    <mat-error>This field must be smaller or equal to 200</mat-error>
-                }
-            }
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="figureCaption">Figure caption</mat-label>
-            <input matInput type="text" name="figureCaption" id="figureCaption" formControlName="figureCaption"/>
-            @if (isFieldValid('figureCaption')) {
-                <mat-error>This field is required</mat-error>
-            }
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="attackName">Attack name</mat-label>
-            <input matInput type="text" name="attackName" id="attackName" formControlName="attackName"/>
-            @if (isFieldValid('attackName')) {
-                <mat-error>This field is required</mat-error>
-            }
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="attackStrength">Attack strength</mat-label>
-            <input matInput type="number" name="attackStrength" id="attackStrength" formControlName="attackStrength"/>
-            @if (isFieldValid('attackStrength')) {
-                @if (formGroup.get('attackStrength')?.hasError('required')) {
-                    <mat-error>This field is required</mat-error>
-                }
-                @if (formGroup.get('attackStrength')?.hasError('min')) {
-                    <mat-error>This field must be greater than 0</mat-error>
-                }
-                @if (formGroup.get('attackStrength')?.hasError('max')) {
-                    <mat-error>This field must be smaller or equal to 200</mat-error>
-                }
-            }
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label for="attackDescription">Attack description</mat-label>
-            <input matInput type="text" name="attackDescription" id="attackDescription" formControlName="attackDescription"/>
-            @if (isFieldValid('attackDescription')) {
-                <mat-error>This field is required</mat-error>
-            }
-        </mat-form-field>
-        <div class="button-container left">
-            <button mat-flat-button style="background-color: rgb(228, 25, 25);" type="button" (click)="deleteMonster()">Delete</button>
-        </div>
-        <div class="button-container right">
-            <button mat-button (click)="navigateBack()">Back</button>
-            <button mat-flat-button type="submit" [disabled]="formGroup.invalid">Save</button>
-        </div>
-    </form>
+  <form [formGroup]="formGroup" (submit)="submit($event)" action="">
+    <mat-form-field>
+      <mat-label for="name">Name</mat-label>
+      <input
+        matInput
+        type="text"
+        name="name"
+        id="name"
+        formControlName="name"
+      />
+      @if (isFieldValid('name')) {
+      <mat-error>This field is required</mat-error>
+      }
+    </mat-form-field>
+    <div class="form-field">
+      <button mat-raised-button type="button" (click)="imageInput.click()">
+        Upload file: {{imageInput.files?.[0]?.name || "..."}}
+      </button>
+      <input
+        hidden
+        #imageInput
+        type="file"
+        name="image"
+        id="image"
+        (change)="onFileChange($event)"
+      />
+      @if (isFieldValid('image')) {
+      <div class="error">This field is required</div>
+      }
+    </div>
+    <mat-form-field>
+      <mat-label for="type">Type</mat-label>
+      <mat-select name="type" id="type" formControlName="type">
+        @for (type of monsterTypes; track type) {
+        <mat-option [value]="type">{{ type }}</mat-option>
+        }
+      </mat-select>
+      @if (isFieldValid('type')) {
+      <mat-error>This field is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="hp">HP</mat-label>
+      <input matInput type="number" name="hp" id="hp" formControlName="hp" />
+      @if (isFieldValid('hp')) { @if (formGroup.get('hp')?.hasError('required'))
+      {
+      <mat-error>This field is required</mat-error>
+      } @if (formGroup.get('hp')?.hasError('min')) {
+      <mat-error>This field must be greater than 0</mat-error>
+      } @if (formGroup.get('hp')?.hasError('max')) {
+      <mat-error>This field must be smaller or equal to 200</mat-error>
+      } }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="figureCaption">Figure caption</mat-label>
+      <input
+        matInput
+        type="text"
+        name="figureCaption"
+        id="figureCaption"
+        formControlName="figureCaption"
+      />
+      @if (isFieldValid('figureCaption')) {
+      <mat-error>This field is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="attackName">Attack name</mat-label>
+      <input
+        matInput
+        type="text"
+        name="attackName"
+        id="attackName"
+        formControlName="attackName"
+      />
+      @if (isFieldValid('attackName')) {
+      <mat-error>This field is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="attackStrength">Attack strength</mat-label>
+      <input
+        matInput
+        type="number"
+        name="attackStrength"
+        id="attackStrength"
+        formControlName="attackStrength"
+      />
+      @if (isFieldValid('attackStrength')) { @if
+      (formGroup.get('attackStrength')?.hasError('required')) {
+      <mat-error>This field is required</mat-error>
+      } @if (formGroup.get('attackStrength')?.hasError('min')) {
+      <mat-error>This field must be greater than 0</mat-error>
+      } @if (formGroup.get('attackStrength')?.hasError('max')) {
+      <mat-error>This field must be smaller or equal to 200</mat-error>
+      } }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="attackDescription">Attack description</mat-label>
+      <input
+        matInput
+        type="text"
+        name="attackDescription"
+        id="attackDescription"
+        formControlName="attackDescription"
+      />
+      @if (isFieldValid('attackDescription')) {
+      <mat-error>This field is required</mat-error>
+      }
+    </mat-form-field>
+    <div class="button-container left">
+      @if (monsterId !== -1) {
+
+      <button
+        mat-flat-button
+        style="background-color: rgb(228, 25, 25)"
+        type="button"
+        (click)="deleteMonster()"
+      >
+        Delete
+      </button>
+      }
+    </div>
+    <div class="button-container right">
+      <button mat-button (click)="navigateBack()">Back</button>
+      <button mat-flat-button type="submit" [disabled]="formGroup.invalid">
+        Save
+      </button>
+    </div>
+  </form>
 </div>

@@ -3,6 +3,7 @@ import { MonsterListComponent } from './pages/monster-list/monster-list.componen
 import { MonsterComponent } from './pages/monster/monster.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LoginComponent } from './pages/login/login.component';
+import { isGuestGuard } from './guards/is-guest.guard';
 import { isLoggedInGuard } from './guards/is-logged-in.guard';
 
 export const routes: Routes = [
@@ -18,7 +19,8 @@ export const routes: Routes = [
     },
     {
         path: "login",
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [isGuestGuard]
     },
     {
         path: "monster",

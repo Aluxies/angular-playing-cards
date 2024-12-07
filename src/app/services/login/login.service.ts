@@ -20,6 +20,10 @@ export class LoginService {
 
   constructor() { }
 
+  isLoggedIn() {
+    return localStorage.getItem('token') !== undefined;
+  }
+
   login(credentials: Credentials): Observable<User | null | undefined> {
     return this.http.post(this.BASE_URL+ '/sessions/login/', credentials).pipe(
       tap((result: any) => {
